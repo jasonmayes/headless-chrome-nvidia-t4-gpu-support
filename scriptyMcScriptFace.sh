@@ -21,3 +21,5 @@ sudo apt install -y google-chrome-stable
 
 # Start dbus to avoid warnings by Chrome later.
 /etc/init.d/dbus start
+
+npm install
