@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "chrome-launcher": "*",
+    "chrome-remote-interface": "*"
+  },
+  "name": "content",
+  "version": "1.0.0",
+  "main": "jRunner.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "Jason Mayes",
+  "type": "module",
+  "description": "Node.js application to interface with headless Chrome with GPU support to capture screenshots and get console output from target webpage"
+}
