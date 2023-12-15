@@ -3,7 +3,7 @@ This repo focuses on the running of client side AI models (that is machine learn
 
 It should be noted however that this solution could also be used to load and run any web page that needs to utilise GPU hardware with WebGL support (WebGPU still under investigation). As such this write up also applies to people working in the web gaming and graphics industries.
 
-This repository compliments my blogpost writeup which you can find here: (COMMING SOON)
+This repository compliments my blogpost writeup which you can find here: (COMING SOON)
 
 ## How to use in Google Colab
 
