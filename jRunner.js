@@ -22,6 +22,7 @@ if (!urlParam) {
         '--use-gl=angle',
         '--use-angle=gl-egl',
         '--disable-vulkan-surface',
+        '--gpu-vendor-id=0x10de',
         '--enable-unsafe-webgpu',
         '--use-cmd-decoder=passthrough',
         '--ignore-gpu-blocklist',
