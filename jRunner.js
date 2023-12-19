@@ -21,6 +21,7 @@ if (!urlParam) {
         '--headless',
         '--use-gl=angle',
         '--use-angle=gl-egl',
+        '--disable-vulkan-surface',
         '--enable-unsafe-webgpu',
         '--use-cmd-decoder=passthrough',
         '--ignore-gpu-blocklist',
