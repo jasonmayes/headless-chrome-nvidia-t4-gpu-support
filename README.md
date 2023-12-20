@@ -38,7 +38,7 @@ Finally you can add a new code cell by clicking the “+Code” button near the 
 Note you could run your own code instead here - my jRunner.js code is simply a starting point to show the basics of how to interface with headless Chrome correctly with GPU support. Also if you want to do this entirely command line with no Node.js script you could instead call:
 
 ```
-!google-chrome-stable --no-sandbox --headless --use-gl=angle --use-angle=gl-egl --use-cmd-decoder=passthrough --enable-unsafe-webgpu --ignore-gpu-blocklist --print-to-pdf=/home/gpu.pdf chrome://gpu
+!google-chrome-stable --no-sandbox --headless=new --use-gl=angle --use-angle=vulkan --enable-features=Vulkan --disable-vulkan-surface --enable-unsafe-webgpu --no-first-run --no-default-browser-check --disable-features=Translate --ash-no-nudges --disable-search-engine-choice-screen --window-size=1280,720 --print-to-pdf=/home/gpu.pdf chrome://gpu
 ```
 
 In the example above I stored the resulting pdf capture in /home/gpu.pdf. If you want to view that file you can expand the left hand folder panel, navigate to home folder, and then click on the 3 dots next to the pdf file shown and download to your local machine to view to confirm the output is working as expected.
