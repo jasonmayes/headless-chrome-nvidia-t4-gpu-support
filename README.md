@@ -1,4 +1,4 @@
-# Using headless Chrome on server side environments for true client side browser emulation with NVIDIA T4 GPUs for Web AI or graphical workloads using WebGL or WebGPU.
+# Using headless Chrome on server side environments such as Google Cloud Platform or Google Colab for true client side browser emulation with NVIDIA T4 GPUs for Web AI or graphical workloads using WebGL or WebGPU.
 This repo focuses on the running of client side AI models (that is machine learning models that execute within a web browser environment like Chrome that are often using the GPU for acceleration) within a server side environment such as Google Colab or Google Cloud Platofrm (GCP) for the purpose of testing such workloads in a standardised replicable environment. 
 
 It should be noted however that this solution could also be used to load and run any web page that needs to utilise GPU hardware with WebGL or WebGPU support. As such this write up also applies to people working in the web gaming and graphics industries.
