@@ -24,7 +24,6 @@ if (!urlParam) {
         '--enable-features=Vulkan',
         '--disable-vulkan-surface',
         '--enable-unsafe-webgpu',
-        '--use-cmd-decoder=passthrough',
         '--ignore-gpu-blocklist',
         '--disable-search-engine-choice-screen',
         '--ash-no-nudges',
