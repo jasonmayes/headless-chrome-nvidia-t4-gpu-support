@@ -8,8 +8,9 @@ import * as chromeLauncher from 'chrome-launcher';
 import CDP from 'chrome-remote-interface';
 import * as fs from 'fs';
 
-const urlParam = process.argv[2];
-if (!urlParam) {
+const TEMINATION_PHRASE = 'captureAndEnd';
+const URL_PARAM = process.argv[2];
+if (!URL_PARAM) {
     throw "Please provide URL as a first argument";
 }
 
@@ -33,11 +34,12 @@ if (!urlParam) {
       ]
     });
   }
+
+    
   const chrome = await launchChrome();
   const protocol = await CDP({
     port: chrome.port
   });
-
   const {
     DOM,
     Network,
@@ -49,7 +51,7 @@ if (!urlParam) {
 
 
   Page.loadEventFired(async () => {
-    if (urlParam === "chrome://gpu") {
+    if (URL_PARAM === "chrome://gpu") {
       const {data} = await Page.printToPDF();
       fs.writeFileSync('/home/gpu.pdf', Buffer.from(data, 'base64'));
       protocol.close();
@@ -61,7 +63,7 @@ if (!urlParam) {
 
   Console.messageAdded(async (result) => {
     console.log(result.message.text);
-    if (result.message.text === "captureAndEnd") {
+    if (result.message.text === TERMINATION_PHRASE) {
       const {data} = await Page.captureScreenshot();
       fs.writeFileSync('/home/screen.png', Buffer.from(data, 'base64'));
       protocol.close();
@@ -69,6 +71,5 @@ if (!urlParam) {
     }
   });
 
-  Page.navigate({url: urlParam});
-
+  Page.navigate({url: URL_PARAM});
 })();
