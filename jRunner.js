@@ -8,7 +8,7 @@ import * as chromeLauncher from 'chrome-launcher';
 import CDP from 'chrome-remote-interface';
 import * as fs from 'fs';
 
-const TEMINATION_PHRASE = 'captureAndEnd';
+const TERMINATION_PHRASE = 'captureAndEnd';
 const URL_PARAM = process.argv[2];
 if (!URL_PARAM) {
     throw "Please provide URL as a first argument";
