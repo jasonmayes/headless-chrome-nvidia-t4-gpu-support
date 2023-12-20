@@ -18,9 +18,10 @@ if (!urlParam) {
     return await chromeLauncher.launch({
       chromeFlags: [
         '--no-sandbox',
-        '--headless',
+        '--headless=new',
         '--use-gl=angle',
         '--use-angle=gl-egl',
+        '--enable-features=Vulkan',
         '--disable-vulkan-surface',
         '--enable-unsafe-webgpu',
         '--use-cmd-decoder=passthrough',
