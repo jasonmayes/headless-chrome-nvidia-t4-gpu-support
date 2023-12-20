@@ -48,4 +48,4 @@ If you found this useful feel free to drop me a shout out over on LinkedIn, Twit
 
 ## Acknowledgements
 
-A special thanks to Yuly Novikov, Andrey Kosyakov, and Alex Rudenko who were instrumental in creating the final working solution with me.
+A special thanks to François Beaufort, Yuly Novikov, Andrey Kosyakov, and Alex Rudenko who were instrumental in creating the final working solution with me.
