@@ -20,7 +20,7 @@ if (!urlParam) {
         '--no-sandbox',
         '--headless=new',
         '--use-gl=angle',
-        '--use-angle=gl-egl',
+        '--use-angle=vulkan',
         '--enable-features=Vulkan',
         '--disable-vulkan-surface',
         '--enable-unsafe-webgpu',
