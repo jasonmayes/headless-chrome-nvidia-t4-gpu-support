@@ -49,7 +49,7 @@ Currently my jRunner.js script will take a screenshot when you log to the consol
 The WebGPU solution currently works so long as you are not drawing to canvas due to disable-vulkan-surface flag. This is fine for Web AI workloads that do not render to canvas but may cause with WebGPU graphical workloads. Right now graphical support eg for gaming would only be via WebGL until a work around is found for this. Please make a PR if you find one.
 
 ## Contact
-If you found this useful feel free to drop me a shout out over on [LinkedIn](https://www.linkedin.com/in/WebAI), [Twitter](https://twitter.com/jason_mayes), or whatever social network you use. It would be great to hear any feedback you have and so I know to write more stuff like this in the future. If it was useful, drop a star on this Github repo for any future updates I may add.
+If you found this useful feel free to drop me a shout out over on [LinkedIn](https://www.linkedin.com/in/WebAI), [Twitter](https://twitter.com/jason_mayes), or whatever social network you use using hashtag **#WebAI**. It would be great to hear any feedback you have and so I know to write more stuff like this in the future. If it was useful, drop a star on this Github repo for any future updates I may add.
 
 Finally if you are curious about Web AI (machine learning in JavaScript) and not sure how to get started you can [take my free course on Google Developers YouTube to go from zero to hero in Web ML](https://goo.gle/Learn-WebML)! All you need to know is JS, no background in AI required.
 
