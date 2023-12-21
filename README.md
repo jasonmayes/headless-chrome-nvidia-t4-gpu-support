@@ -7,8 +7,9 @@ This repository compliments my blogpost writeup which you can find here: (COMING
 
 ## How to use in Google Colab
 
-### 1. Create a new Google Colab Workspace
+### 1. Create a new Google Colab Notebook
 Ensure you are signed in with your Google account and head on over to colab.google, Once loaded click the “New Notebook” button at the top right of the page.
+Alternatively [here is one I made you can use with the code below already pre added](https://colab.research.google.com/drive/1vuczRYfLUFq1RBbNknhz1JE8BZwE5_zd).
 
 ### 2. Connect to a T4 GPU enabled server
 At the top right of the new project that loaded, click on the connect drop down icon near the top right of the notebook and select “change runtime type”. In the modal window that pops up, select a T4 GPU as your hardware accelerator. This will mean when you connect it will use a Linux instance with a T4 GPU attached.
