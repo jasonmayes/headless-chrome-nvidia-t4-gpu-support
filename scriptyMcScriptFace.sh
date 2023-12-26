@@ -22,4 +22,5 @@ sudo apt install -y google-chrome-stable
 # Start dbus to avoid warnings by Chrome later.
 /etc/init.d/dbus start
 
-npm install
+cd examples/chrome-direct && npm install
+cd examples/puppeteer && npm install
