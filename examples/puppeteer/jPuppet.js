@@ -2,7 +2,7 @@ import * as puppeteer from 'puppeteer';
 
 const url = process.argv[2];
 if (!url) {
-    throw "Please provide URL as a first argument";
+  throw "Please provide URL as a first argument";
 }
 
 async function runWebpage() {
@@ -27,7 +27,7 @@ async function runWebpage() {
 
   const page = await browser.newPage();
 
-  // Log console output from page execution and then take screenshow 
+  // Log console output from page execution and then take screenshot 
   // when kill phrase detected and end process.
   page.on('console', async function(msg) {
     console.log(msg.text());
