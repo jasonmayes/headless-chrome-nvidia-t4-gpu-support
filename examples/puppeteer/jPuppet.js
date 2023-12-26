@@ -7,7 +7,7 @@ if (!url) {
 
 async function runWebpage() {
   const browser = await puppeteer.launch({
-    headless: true, //'new' if using new
+    headless: 'new',
     ignoreDefaultArgs: true,
     args:  [
         '--no-sandbox',
