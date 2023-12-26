@@ -38,10 +38,12 @@ async function runWebpage() {
   });
 
   await page.goto(url);
-  // Example how to wait 5 seconds before taking screenshot
-  await page.waitForTimeout(5000);
-  await page.screenshot({path: '/home/screenshot.png'});
+
+  // Special case for chrome://gpu screenshot.
   if (url === 'chrome://gpu') {
+    // Wait 5 seconds before taking screenshot.
+    await page.waitForTimeout(5000);
+    page.pdf({path: '/home/gpu.pdf'});
     await browser.close();
   }
 }
