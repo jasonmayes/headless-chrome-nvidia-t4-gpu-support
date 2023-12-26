@@ -20,7 +20,6 @@ if (!URL_PARAM) {
       chromeFlags: [
         '--no-sandbox',
         '--headless=new',
-        '--use-gl=angle',
         '--use-angle=vulkan',
         '--enable-features=Vulkan',
         '--disable-vulkan-surface',
