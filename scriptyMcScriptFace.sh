@@ -23,4 +23,4 @@ sudo apt install -y google-chrome-stable
 /etc/init.d/dbus start
 
 cd examples/chrome-direct && npm install
-cd examples/puppeteer && npm install
+cd ../puppeteer && npm install
