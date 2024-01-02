@@ -1,8 +1,8 @@
 # Update, install correct drivers, and remove the old ones.
 apt-get update
-apt-get install -y wget vulkan-tools xvfb libnvidia-gl-525
+apt-get install -y vulkan-tools libnvidia-gl-525
 apt-get remove -y mesa-vulkan-drivers
-cat /etc/lsb-release
+
 # Verify NVIDIA drivers can see the T4 GPU and that vulkan is working correctly.
 nvidia-smi
 vulkaninfo
