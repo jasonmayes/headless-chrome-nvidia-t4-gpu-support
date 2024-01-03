@@ -20,6 +20,7 @@ sudo apt install -y google-chrome-stable
 
 # Start dbus to avoid warnings by Chrome later.
 /etc/init.d/dbus start
+%env DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
 
 cd examples/chrome-direct && npm install
 cd ../puppeteer && npm install
