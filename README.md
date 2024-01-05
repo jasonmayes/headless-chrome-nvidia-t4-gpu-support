@@ -52,10 +52,10 @@ Alternatively if you prefer to use Puppeteer you can call:
 !node headless-chrome-nvidia-t4-gpu-support/examples/puppeteer/jPuppet.js chrome://gpu
 ```
 
-Note you could run your own code instead here - my jRunner.js / jPuppet.js code are simply starting points to show the basics of how to interface with headless Chrome correctly with GPU support. Also if you want to do this entirely command line without any Node.js script you could instead call:
+Note you could run your own code instead here - my jRunner.js / jPuppet.js code are simply starting points to show the basics of how to interface with headless Chrome correctly with GPU support. Also if you want to do this entirely command line without any Node.js script you could instead call the below (but note that chrome://gpu page is disabled when using google-chrome-stable so use a website like browserleaks to test WebGPU support):
 
 ```
-!google-chrome-stable --no-sandbox --headless=new --use-angle=vulkan --enable-features=Vulkan --disable-vulkan-surface --enable-unsafe-webgpu --no-first-run --no-default-browser-check --disable-features=Translate --ash-no-nudges --disable-search-engine-choice-screen --window-size=1280,720 --print-to-pdf=/home/gpu.pdf chrome://gpu
+!google-chrome-stable --no-sandbox --headless=new --use-angle=vulkan --enable-features=Vulkan --disable-vulkan-surface --enable-unsafe-webgpu --no-first-run --no-default-browser-check --disable-features=Translate --ash-no-nudges --disable-search-engine-choice-screen --window-size=1280,720 --print-to-pdf=/home/gpu.pdf https://browserleaks.com/webgpu
 ```
 
 In the example above I stored the resulting pdf capture in /home/gpu.pdf. If you want to view that file you can expand the left hand folder panel, navigate to home folder, and then click on the 3 dots next to the pdf file shown and download to your local machine to view to confirm the output is working as expected.
