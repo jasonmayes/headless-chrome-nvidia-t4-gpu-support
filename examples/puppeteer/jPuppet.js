@@ -32,7 +32,7 @@ async function runWebpage() {
   page.on('console', async function(msg) {
     console.log(msg.text());
     if (msg.text() === 'captureAndEnd') {
-      await page.screenshot({path: '/home/screenshotEnd.png'});
+      await page.screenshot({path: '/content/screenshotEnd.png'});
       await browser.close();
     }
   });
