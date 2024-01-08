@@ -8,6 +8,7 @@ import * as chromeLauncher from 'chrome-launcher';
 import CDP from 'chrome-remote-interface';
 import * as fs from 'fs';
 
+const OUTPUT_FOLDER = '/content';
 const TERMINATION_PHRASE = 'captureAndEnd';
 const URL_PARAM = process.argv[2];
 if (!URL_PARAM) {
@@ -52,7 +53,7 @@ if (!URL_PARAM) {
   Page.loadEventFired(async () => {
     if (URL_PARAM === "chrome://gpu") {
       const {data} = await Page.printToPDF();
-      fs.writeFileSync('/home/gpu.pdf', Buffer.from(data, 'base64'));
+      fs.writeFileSync(OUTPUT_FOLDER + '/gpu.pdf', Buffer.from(data, 'base64'));
       protocol.close();
       chrome.kill();
     }
@@ -64,7 +65,7 @@ if (!URL_PARAM) {
     console.log(result.message.text);
     if (result.message.text === TERMINATION_PHRASE) {
       const {data} = await Page.captureScreenshot();
-      fs.writeFileSync('/home/screen.png', Buffer.from(data, 'base64'));
+      fs.writeFileSync(OUTPUT_FOLDER + '/screen.png', Buffer.from(data, 'base64'));
       protocol.close();
       chrome.kill();
     }
