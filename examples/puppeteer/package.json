@@ -9,5 +9,5 @@
   "keywords": [],
   "author": "Jason Mayes",
   "type": "module",
-  "description": "Node.js puppetter application to interface with headless Chrome with GPU support to capture screenshots and get console output from target webpage"
+  "description": "Node.js Puppeteer application to interface with headless Chrome with GPU support to capture screenshots and get console output from target webpage"
 }
