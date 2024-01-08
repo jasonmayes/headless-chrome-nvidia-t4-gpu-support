@@ -43,7 +43,7 @@ async function runWebpage() {
   if (url === 'chrome://gpu') {
     // Wait 5 seconds before taking screenshot.
     await page.waitForTimeout(5000);
-    await page.pdf({path: '/home/gpu.pdf'});
+    await page.pdf({path: '/content/gpu.pdf'});
     await browser.close();
   }
 }
