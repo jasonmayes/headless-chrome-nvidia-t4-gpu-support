@@ -1,7 +1,8 @@
 import puppeteer from 'puppeteer';
 
-const url = process.argv[2];
-if (!url) {
+const OUTPUT_FOLDER = '/content';
+const URL = process.argv[2];
+if (!URL) {
   throw "Please provide URL as a first argument";
 }
 
@@ -32,18 +33,18 @@ async function runWebpage() {
   page.on('console', async function(msg) {
     console.log(msg.text());
     if (msg.text() === 'captureAndEnd') {
-      await page.screenshot({path: '/content/screenshotEnd.png'});
+      await page.screenshot({path: OUTPUT_FOLDER + '/screenshotEnd.png'});
       await browser.close();
     }
   });
 
-  await page.goto(url);
+  await page.goto(URL);
 
   // Special case for chrome://gpu screenshot.
-  if (url === 'chrome://gpu') {
+  if (URL === 'chrome://gpu') {
     // Wait 5 seconds before taking screenshot.
     await page.waitForTimeout(5000);
-    await page.pdf({path: '/content/gpu.pdf'});
+    await page.pdf({path: OUTPUT_FOLDER + '/gpu.pdf'});
     await browser.close();
   }
 }
