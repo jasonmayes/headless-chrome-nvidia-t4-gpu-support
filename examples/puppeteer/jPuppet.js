@@ -1,8 +1,8 @@
 import puppeteer from 'puppeteer';
 
 const OUTPUT_FOLDER = '/content';
-const URL = process.argv[2];
-if (!URL) {
+const URL_PARAM = process.argv[2];
+if (!URL_PARAM) {
   throw "Please provide URL as a first argument";
 }
 
@@ -38,10 +38,10 @@ async function runWebpage() {
     }
   });
 
-  await page.goto(URL);
+  await page.goto(URL_PARAM);
 
   // Special case for chrome://gpu screenshot.
-  if (URL === 'chrome://gpu') {
+  if (URL_PARAM === 'chrome://gpu') {
     // Wait 5 seconds before taking screenshot.
     await page.waitForTimeout(5000);
     await page.pdf({path: OUTPUT_FOLDER + '/gpu.pdf'});
