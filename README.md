@@ -52,13 +52,18 @@ Alternatively if you prefer to use Puppeteer you can call:
 !node headless-chrome-nvidia-t4-gpu-support/examples/puppeteer/jPuppet.js chrome://gpu
 ```
 
-Note you could run your own code instead here - my jRunner.js / jPuppet.js code are simply starting points to show the basics of how to interface with headless Chrome correctly with GPU support. Also if you want to do this entirely command line without any Node.js script you could instead call the below (but note that chrome://gpu page is disabled when using google-chrome-stable so use a website like browserleaks to test WebGPU support):
+Note you could run your own code instead here - my jRunner.js / jPuppet.js code are simply starting points to show the basics of how to interface with headless Chrome correctly with GPU support. 
+
+Also if you want to do this entirely command line without any Node.js script you could instead call the below (but note that chrome://gpu page is disabled when using google-chrome-stable so use a website like WebGPUReport.org to test WebGPU support):
 
 ```
-!google-chrome-stable --no-sandbox --headless=new --use-angle=vulkan --enable-features=Vulkan --disable-vulkan-surface --enable-unsafe-webgpu --no-first-run --no-default-browser-check --disable-features=Translate --ash-no-nudges --disable-search-engine-choice-screen --window-size=1280,720 --print-to-pdf=/home/gpu.pdf https://browserleaks.com/webgpu
+!google-chrome-stable --no-sandbox --headless=new --use-angle=vulkan --enable-features=Vulkan --disable-vulkan-surface --enable-unsafe-webgpu --no-first-run --no-default-browser-check --disable-features=Translate --ash-no-nudges --disable-search-engine-choice-screen --virtual-time-budget=300000 --window-size=1280,720 --print-to-pdf=/content/gpu.pdf https://webgpureport.org
 ```
 
-In the example above I stored the resulting pdf capture in /home/gpu.pdf. If you want to view that file you can expand the left hand folder panel, navigate to home folder, and then click on the 3 dots next to the pdf file shown and download to your local machine to view to confirm the output is working as expected.
+Things to be aware of:
+
+1. In the command line only example above I set an optional flag "virtual-time-budget" as this particular website takes some time to load. You may want to change the timing to suit the site you need to screenshot or use my Node.js script that can go just beyond naive time waiting.
+2. In both examples above I stored the resulting pdf capture in /home/gpu.pdf. If you want to view that file you can expand the left hand folder panel, navigate to home folder, and then click on the 3 dots next to the pdf file shown and download to your local machine to view to confirm the output is working as expected.
 
 ## Notes
 Currently my jRunner.js script will take a screenshot and end the browser process when you log to the console "captureAndEnd" (case sensitive) so that you can load and do stuff in your webpage before this Node process actually captures the screenshot. Feel free to edit as you need to make it useful for your situation.
