@@ -4,8 +4,9 @@ This repo focuses on the running of client side AI models (that is machine learn
 It should be noted however that this solution could also be used to load and run any web page that needs to utilise GPU hardware with WebGL or WebGPU support. As such this write up also applies to people working in the web gaming and graphics industries.
 
 This repository compliments my easier to read blogpost writeup which you can find here:
-Docs for using in Google Colab environment: https://developer.chrome.com/docs/web-platform/webgpu/colab-headless
-High level blog post: https://developer.chrome.com/blog/supercharge-web-ai-testing
+
+1. Docs for using in Google Colab environment: https://developer.chrome.com/docs/web-platform/webgpu/colab-headless
+2. High level blog post: https://developer.chrome.com/blog/supercharge-web-ai-testing
 
 I have confirmed and tested this solution to work on the following NVIDIA Server GPUs:
 - NVIDIA T4
