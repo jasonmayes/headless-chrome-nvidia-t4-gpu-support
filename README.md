@@ -11,6 +11,7 @@ This repository compliments my easier to read blogpost writeup which you can fin
 I have confirmed and tested this solution to work on the following NVIDIA Server GPUs:
 - NVIDIA T4
 - NVIDIA V100
+- NVIDIA A100
 
 By running machine learning models client side you can gain super powers like privacy, lower latency, and significant cost savings vs executing in the cloud (Cloud AI). As of 2023 Google crossed over 1 billion downloads of their Web AI models and libraries - a historic milestone and a sign of how web developers and engineers are shifting to embrace AI in their next generation web apps to make some truly incredible solutions.
 
