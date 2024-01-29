@@ -72,9 +72,9 @@ if (!URL_PARAM) {
   });
 
   // Ensure we capture errors too.
-  Page.addEventListener('pageerror', ({ message }) => console.log(message));
-  Page.addEventListener('response', response => console.log(`${response.status()} ${response.url()}`));
-  Page.addEventListener('requestfailed', request => console.log(`${request.failure().errorText} ${request.url()}`));
+  Runtime.consoleAPICalled((entry) => {
+    console.log('Runtime Console Call: ' + entry.args.map(arg=>arg.value).join(' '));
+  });
 
   Page.navigate({url: URL_PARAM});
 })();
