@@ -71,5 +71,10 @@ if (!URL_PARAM) {
     }
   });
 
+  // Ensure we capture errors too.
+  Page.on('pageerror', ({ message }) => console.log(message));
+  Page.on('response', response => console.log(`${response.status()} ${response.url()}`));
+  Page.on('requestfailed', request => console.log(`${request.failure().errorText} ${request.url()}`));
+
   Page.navigate({url: URL_PARAM});
 })();
