@@ -38,6 +38,18 @@ async function runWebpage() {
     }
   });
 
+  page.on('pageerror', error => {
+    console.log(error.message);
+  });
+  
+  page.on('response', response => {
+    console.log(response.status, response.url);
+  });
+  
+  page.on('requestfailed', request => {
+    console.log(request.failure().errorText, request.url);
+  });
+  
   await page.goto(URL_PARAM);
 
   // Special case for chrome://gpu screenshot.
