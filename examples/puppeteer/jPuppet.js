@@ -43,7 +43,7 @@ async function runWebpage() {
   });
   
   page.on('response', response => {
-    console.log(response.status, response.url);
+    console.log('URL Response:' + response.status + ": " + response.url);
   });
   
   page.on('requestfailed', request => {
