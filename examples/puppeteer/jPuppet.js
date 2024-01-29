@@ -47,7 +47,7 @@ async function runWebpage() {
   });
   
   page.on('requestfailed', request => {
-    console.log(request.failure().errorText, request.url);
+    console.log('Request Failed: ' + request.failure().errorText + ', ' + request.url);
   });
   
   await page.goto(URL_PARAM);
