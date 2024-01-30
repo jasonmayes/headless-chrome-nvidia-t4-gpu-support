@@ -23,7 +23,8 @@ async function runWebpage() {
         '--no-first-run',
         '--disable-features=Translate',
         '--no-default-browser-check',
-        '--window-size=1280,720'
+        '--window-size=1280,720',
+        '--max_old_space_size=4096'
       ]
   });
 
