@@ -43,11 +43,11 @@ async function runWebpage() {
   });
   
   page.on('response', response => {
-    console.log('URL Response:' + response.status + ": " + response.url);
+    console.log('URL Response:' + response.status() + ": " + response.url());
   });
   
   page.on('requestfailed', request => {
-    console.log('Request Failed: ' + request.failure().errorText + ', ' + request.url);
+    console.log('Request Failed: ' + request.failure().errorText + ', ' + request.url());
   });
   
   await page.goto(URL_PARAM);
