@@ -10,6 +10,7 @@ async function runWebpage() {
   const browser = await puppeteer.launch({
     headless: 'new',
     ignoreDefaultArgs: true,
+    dumpio: true, // Remove this line if you dont need to view IO data.
     args:  [
         '--no-sandbox',
         '--headless=new',
