@@ -47,7 +47,7 @@ async function runWebpage() {
       try {
         fs.writeFile('object.json', json, 'utf8', function() {
           console.log('Object written to disk');
-          resolve(text);
+          resolve(true);
         });
       } catch (err) {
         reject(err);
