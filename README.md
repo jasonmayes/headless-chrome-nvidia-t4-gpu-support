@@ -45,15 +45,15 @@ Wait for the code to finish executing and verify nvidia-smi printed out that it 
 
 ### 4. Run Node.js code to use and automate headless Chrome
 
-Finally you can add a new code cell by clicking the “+Code” button near the top left of the page. Add the following code to call the jRunner.js Node script in this repo that will perform the capture of arbitary webpages you define (in this instance you will capture the chrome://gpu page):
+Finally you can add a new code cell by clicking the “+Code” button near the top left of the page. Add the following code to call the jPuppet.js Node script in this repo that will perform the capture of arbitary webpages you define (in this instance you will capture the chrome://gpu page):
 
-```
-!node headless-chrome-nvidia-t4-gpu-support/examples/chrome-direct/jRunner.js chrome://gpu
-```
-
-Alternatively if you prefer to use Puppeteer you can call:
 ```
 !node headless-chrome-nvidia-t4-gpu-support/examples/puppeteer/jPuppet.js chrome://gpu
+```
+
+I highly recommend using jPuppet.js above as your starting point as more feature rich and stable. Alternatively if you prefer to use chrome direct interface to be bare bones you can do so by calling:
+```
+!node headless-chrome-nvidia-t4-gpu-support/examples/chrome-direct/jRunner.js chrome://gpu
 ```
 
 Note you could run your own code instead here - my jRunner.js / jPuppet.js code are simply starting points to show the basics of how to interface with headless Chrome correctly with GPU support. 
