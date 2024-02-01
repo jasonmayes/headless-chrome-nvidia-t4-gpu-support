@@ -40,11 +40,20 @@ async function runWebpage() {
     }
   });
 
-  await page.exposeFunction('objectLogger', function(obj) {
+  await page.exposeFunction('objectLogger', async function(obj) {
     let json = JSON.stringify(obj);
-    fs.writeFile('object.json', json, 'utf8', function() {
-      console.log('Object written to disk');
+
+    return new Promise((resolve, reject) => {
+      try {
+        fs.writeFile('object.json', json, 'utf8', function() {
+          console.log('Object written to disk');
+          resolve(text);
+        });
+      } catch (err) {
+        reject(err);
+      }
     });
+    
   });
   
   page.on('pageerror', error => {
