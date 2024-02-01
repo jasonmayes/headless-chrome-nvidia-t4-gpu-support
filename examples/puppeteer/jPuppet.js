@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer';
+import * as fs from 'fs';
 
 const OUTPUT_FOLDER = '/content';
 const URL_PARAM = process.argv[2];
@@ -39,6 +40,13 @@ async function runWebpage() {
     }
   });
 
+  await page.exposeFunction('objectLogger', function(obj) {
+    let json = JSON.stringify(obj);
+    fs.writeFile('object.json', json, 'utf8', function() {
+      console.log('Object written to disk');
+    });
+  });
+  
   page.on('pageerror', error => {
     console.log(error.message);
   });
