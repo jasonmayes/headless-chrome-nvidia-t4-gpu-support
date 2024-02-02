@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import * as fs from 'fs';
+import * as JSONStream from 'JSONStream';
 
 const OUTPUT_FOLDER = '/content';
 const URL_PARAM = process.argv[2];
@@ -42,11 +43,15 @@ async function runWebpage() {
   });
 
   await page.exposeFunction('objectLogger', async function(obj) {
-    let json = JSON.stringify(obj);
-
     return new Promise((resolve, reject) => {
       try {
-        fs.writeFile('object.json', json, 'utf8', function() {
+        let fileStream = fs.createWriteStream('object.json');
+        let objStream = JSONStream.stringify();
+        objStream.pipe(fileStream);    
+        objStream.write(obj);
+        objStream.end();
+    
+        fileStream.on('finish', function completed() {
           console.log('Object written to disk');
           resolve(true);
         });
@@ -54,7 +59,6 @@ async function runWebpage() {
         reject(err);
       }
     });
-    
   });
   
   page.on('pageerror', error => {
