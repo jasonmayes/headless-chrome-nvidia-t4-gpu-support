@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "puppeteer": "*"
+    "puppeteer": "*",
+    "JSONStream": "*"
   },
   "name": "content",
   "version": "1.0.0",
