@@ -8,6 +8,16 @@ if (!URL_PARAM) {
   throw "Please provide URL as a first argument";
 }
 
+let objCache = {};
+
+function getObjPropertyReference(obj, path) {
+  if (!path) {
+    return obj;
+  }
+  const properties = path.split('.');
+  return getObjPropertyReference(obj[properties.shift()], properties.join('.'));
+}
+
 async function runWebpage() {
   const browser = await puppeteer.launch({
     headless: 'new',
@@ -42,22 +52,37 @@ async function runWebpage() {
     }
   });
 
-  await page.exposeFunction('objectLogger', async function(obj) {
+  await page.exposeFunction('objectLogger', async function(obj, concatArray, hasMore, concatProperty) {
     return new Promise((resolve, reject) => {
-      try {
-        let fileStream = fs.createWriteStream('object.json');
-        let objStream = JSONStream.stringify();
-        objStream.pipe(fileStream);    
-        objStream.write(obj);
-        objStream.end();
-    
-        fileStream.on('finish', function completed() {
-          console.log('Object written to disk');
-          resolve(true);
-        });
-      } catch (err) {
-        reject(err);
+      // check if we want to concatenate whatever object is passed vs just merge and override.
+      if (concatArray) {
+        let objectArray = getObjPropertyReference(objCache, concatProperty);
+        if (objectArray !== undefined) {
+          //Push array element to the object's existing array.
+          objectArray.push(concatArray);
+        }
+      } else {
+        // Use obj spread to merge objects back to one.
+        objCache = {...objCache, ...obj};
       }
+      
+      if (!hasMore) {
+        try {
+          let fileStream = fs.createWriteStream('object.json');
+          let objStream = JSONStream.stringify();
+          objStream.pipe(fileStream);    
+          objStream.write(objCache);
+          objStream.end();
+      
+          fileStream.on('finish', function completed() {
+            console.log('Object written to disk');
+            resolve(true);
+          });
+        } catch (err) {
+          reject(err);
+        }
+      } else {
+        resolve(true);
     });
   });
   
