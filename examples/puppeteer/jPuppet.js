@@ -63,7 +63,7 @@ async function runWebpage() {
         let objectArray = getObjPropertyReference(objCache, concatProperty);
         if (objectArray !== undefined) {
           //Push array element to the object's existing array.
-          objectArray.push(concatArray);
+          objectArray.push(obj);
         }
       } else {
         // Use obj spread to merge objects back to one.
