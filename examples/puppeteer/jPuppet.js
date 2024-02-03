@@ -15,7 +15,11 @@ function getObjPropertyReference(obj, path) {
     return obj;
   }
   const properties = path.split('.');
-  return getObjPropertyReference(obj[properties.shift()], properties.join('.'));
+  try {
+    return getObjPropertyReference(obj[properties.shift()], properties.join('.'));
+  } catch (e) {
+    return undefined;
+  }
 }
 
 async function runWebpage() {
