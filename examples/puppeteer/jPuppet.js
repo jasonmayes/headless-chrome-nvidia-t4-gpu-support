@@ -83,7 +83,7 @@ async function runWebpage() {
         }
       } else {
         resolve(true);
-    });
+      };
   });
   
   page.on('pageerror', error => {
