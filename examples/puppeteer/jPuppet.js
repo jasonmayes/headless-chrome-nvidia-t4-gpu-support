@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import * as fs from 'fs';
 
-const OUTPUT_FOLDER = '/content';
+const OUTPUT_FOLDER = '/mnt/ramdisk';
 const URL_PARAM = process.argv[2];
 if (!URL_PARAM) {
   throw "Please provide URL as a first argument";
