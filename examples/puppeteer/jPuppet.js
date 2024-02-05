@@ -84,13 +84,11 @@ async function runWebpage() {
         fileStream.on('error', function(e) {
           console.error(e);
           isWriting = false;
-          reject(e);
         });
         
         fileStream.on('finish', function completed() {
           console.log('Object written to disk');
           isWriting = false;
-          resolve(true);
         });
         
         isWriting = true;
@@ -105,6 +103,7 @@ async function runWebpage() {
       }
       if (!hasMore) {
         fileStream.end();
+        resolve(true);
       } else {
         resolve(true);
       }
