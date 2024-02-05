@@ -97,7 +97,7 @@ async function runWebpage() {
       // check if we want to concatenate whatever object is passed vs just merge and override.
       if (concatArray) {
         let {prepend, postpend} = convertToJSONPropertyStr(concatProperty);
-        fileStream.write(prepend + JSON.stringify(obj) + postpend);
+        fileStream.write('＼n' + prepend + JSON.stringify(obj) + postpend);
       } else {
         fileStream.write(JSON.stringify(obj));
       }
