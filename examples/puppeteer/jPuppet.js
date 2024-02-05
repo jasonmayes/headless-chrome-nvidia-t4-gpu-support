@@ -1,6 +1,5 @@
 import puppeteer from 'puppeteer';
 import * as fs from 'fs';
-import * as JSONStream from 'JSONStream';
 
 const OUTPUT_FOLDER = '/content';
 const URL_PARAM = process.argv[2];
@@ -8,7 +7,10 @@ if (!URL_PARAM) {
   throw "Please provide URL as a first argument";
 }
 
-let objCache = {};
+let isWriting = false;
+let currentFile = undefined;
+let fileStream = undefined;
+
 
 function getObjPropertyReference(obj, path) {
   if (!path) {
@@ -21,6 +23,19 @@ function getObjPropertyReference(obj, path) {
     return undefined;
   }
 }
+
+
+function convertToJSONPropertyStr(path) {
+  let arr = path.split('.');
+  let prepend = '{' + arr.map((x) => '"' + x + '"').join(': {');
+  let postpend = '';
+  
+  for (i = 0; i < arr.length; i++) {
+    postpend += '}';
+  }
+  return {'prepend': prepend, 'postpend': postpend};
+}
+
 
 async function runWebpage() {
   const browser = await puppeteer.launch({
@@ -58,33 +73,40 @@ async function runWebpage() {
 
   await page.exposeFunction('objectLogger', async function(obj, concatArray, hasMore, concatProperty) {
     return new Promise((resolve, reject) => {
+
+      // Check if we have already setup a file stream to write to. If not, start new one.
+      if (!isWriting) {
+        // Start new file stream using current timestamp of request as filename.
+        currentFile = Date.now();
+        fileStream = fs.createWriteStream(OUTPUT_FOLDER + '/' + currentFile + '.jsonl');
+        
+        // Handle filesystem errors.
+        fileStream.on('error', function(e) {
+          console.error(e);
+          isWriting = false;
+          reject(e);
+        });
+        
+        fileStream.on('finish', function completed() {
+          console.log('Object written to disk');
+          isWriting = false;
+          resolve(true);
+        });
+        
+        isWriting = true;
+      }
+      
       // check if we want to concatenate whatever object is passed vs just merge and override.
       if (concatArray) {
-        let objectArray = getObjPropertyReference(objCache, concatProperty);
-        if (objectArray !== undefined) {
-          //Push array element to the object's existing array.
-          objectArray.push(obj);
-        }
+        let {prepend, postpend} = convertToJSONProperty(concatProperty);
+        fileStream.write(prepend + JSON.stringify(obj) + postpend);
       } else {
         // Use obj spread to merge objects back to one.
         objCache = {...objCache, ...obj};
+        fileStream.write(JSON.stringify(objCache));
       }
-      
       if (!hasMore) {
-        try {
-          let fileStream = fs.createWriteStream('object.json');
-          let objStream = JSONStream.stringify();
-          objStream.pipe(fileStream);    
-          objStream.write(objCache);
-          objStream.end();
-      
-          fileStream.on('finish', function completed() {
-            console.log('Object written to disk');
-            resolve(true);
-          });
-        } catch (err) {
-          reject(err);
-        }
+        fileStream.end();
       } else {
         resolve(true);
       }
