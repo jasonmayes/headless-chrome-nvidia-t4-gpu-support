@@ -23,7 +23,8 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/dbus/system_bus_socket"
 /etc/init.d/dbus start
 
 # Enable RAM disk for efficient large file obj writes
-mount -o size=512M -t tmpfs none /mnt/tmpfs
+sudo mkdir /mnt/ramdisk 
+mount -o size=512M -t tmpfs none /mnt/ramdisk
 
 cd examples/chrome-direct && npm install
 cd ../puppeteer && npm install
