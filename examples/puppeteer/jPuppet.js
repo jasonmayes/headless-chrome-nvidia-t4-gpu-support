@@ -30,7 +30,7 @@ function convertToJSONPropertyStr(path) {
   let prepend = '{' + arr.map((x) => '"' + x + '"').join(': {');
   let postpend = '';
   
-  for (i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     postpend += '}';
   }
   return {'prepend': prepend, 'postpend': postpend};
