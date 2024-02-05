@@ -101,9 +101,7 @@ async function runWebpage() {
         let {prepend, postpend} = convertToJSONProperty(concatProperty);
         fileStream.write(prepend + JSON.stringify(obj) + postpend);
       } else {
-        // Use obj spread to merge objects back to one.
-        objCache = {...objCache, ...obj};
-        fileStream.write(JSON.stringify(objCache));
+        fileStream.write(JSON.stringify(obj));
       }
       if (!hasMore) {
         fileStream.end();
