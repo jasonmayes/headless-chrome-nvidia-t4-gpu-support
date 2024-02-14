@@ -1,5 +1,7 @@
 import puppeteer from 'puppeteer';
 import * as fs from 'fs';
+import {createServer} from "http";
+import {Server} from "socket.io";
 
 const OUTPUT_FOLDER = '/mnt/ramdisk';
 const URL_PARAM = process.argv[2];
@@ -133,4 +135,23 @@ async function runWebpage() {
   }
 }
 
+// Create websocket server to receive data from remote webpage.
+const httpServer = createServer();
+const io = new Server(httpServer, {
+  // options
+});
+
+io.on("connection", (socket) => {
+  console.log('Websocket connection connected');
+  
+  socket.on('jsObj', (jsObj) => {
+    console.log(JSON.stringify(jsObj));
+  });
+
+  socket.on('jsArrayItem', (jsArrayItem) => {
+    console.log(JSON.stringify(jsArrayItem).length);
+  });
+});
+
+httpServer.listen(3000);
 runWebpage();
