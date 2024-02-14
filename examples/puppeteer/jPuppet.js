@@ -149,7 +149,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on('jsArrayItem', (jsArrayItem) => {
-    console.log(JSON.stringify(jsArrayItem).length);
+    console.log(jsArrayItem.length);
   });
 });
 
