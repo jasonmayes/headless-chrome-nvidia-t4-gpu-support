@@ -148,8 +148,8 @@ io.on("connection", (socket) => {
     console.log(JSON.stringify(jsObj));
   });
 
-  socket.on('jsArrayItem', (jsArrayItem) => {
-    console.log(jsArrayItem.length);
+  socket.on('jsArrayItem', (jsArrayItem, callback) => {
+    callback(true);
   });
 });
 
