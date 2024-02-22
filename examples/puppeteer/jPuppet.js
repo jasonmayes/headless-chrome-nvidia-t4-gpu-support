@@ -107,7 +107,7 @@ const io = new Server(httpServer, {
   // options
 });
 
-let arrayFileStream = fs.createWriteStream(OUTPUT_FOLDER + '/array' + Date.now() + 'jsonl');
+let arrayFileStream = fs.createWriteStream(OUTPUT_FOLDER + '/array' + Date.now() + '.jsonl');
 arrayFileStream.on('error', handleFSError);
 arrayFileStream.on('finish', handleFSComplete);
 
@@ -134,7 +134,7 @@ io.on("connection", (socket) => {
       arrayFileStream.end();
       console.log('Array result written to disk');
       // Setup next stream writer.
-      arrayFileStream = fs.createWriteStream(OUTPUT_FOLDER + '/array' + Date.now() + 'jsonl');
+      arrayFileStream = fs.createWriteStream(OUTPUT_FOLDER + '/array' + Date.now() + '.jsonl');
     }
   });
 });
