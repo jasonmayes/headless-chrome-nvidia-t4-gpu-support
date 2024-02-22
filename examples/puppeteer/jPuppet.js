@@ -9,10 +9,6 @@ if (!URL_PARAM) {
   throw "Please provide URL as a first argument";
 }
 
-let isWriting = false;
-let currentFile = undefined;
-let fileStream = undefined;
-
 
 function getObjPropertyReference(obj, path) {
   if (!path) {
@@ -72,45 +68,6 @@ async function runWebpage() {
       await browser.close();
     }
   });
-
-  await page.exposeFunction('objectLogger', async function(obj, concatArray, hasMore, concatProperty) {
-    return new Promise((resolve, reject) => {
-
-      // Check if we have already setup a file stream to write to. If not, start new one.
-      if (!isWriting) {
-        // Start new file stream using current timestamp of request as filename.
-        currentFile = Date.now();
-        fileStream = fs.createWriteStream(OUTPUT_FOLDER + '/' + currentFile + '.jsonl');
-        
-        // Handle filesystem errors.
-        fileStream.on('error', function(e) {
-          console.error(e);
-          isWriting = false;
-        });
-        
-        fileStream.on('finish', function completed() {
-          console.log('Object written to disk');
-          isWriting = false;
-        });
-        
-        isWriting = true;
-      }
-      
-      // check if we want to concatenate whatever object is passed vs just merge and override.
-      if (concatArray) {
-        let {prepend, postpend} = convertToJSONPropertyStr(concatProperty);
-        fileStream.write('＼n' + prepend + JSON.stringify(obj) + postpend);
-      } else {
-        fileStream.write(JSON.stringify(obj));
-      }
-      if (!hasMore) {
-        fileStream.end();
-        resolve(true);
-      } else {
-        resolve(true);
-      }
-    });
-  });
   
   page.on('pageerror', error => {
     console.log(error.message);
@@ -135,21 +92,47 @@ async function runWebpage() {
   }
 }
 
+
+function handleFSError(e) {
+  console.error(e);
+}
+
+function handleFSComplete() {
+  console.log('Object written to disk');
+}
+
 // Create websocket server to receive data from remote webpage.
 const httpServer = createServer();
 const io = new Server(httpServer, {
   // options
 });
 
+let arrayFileStream = fs.createWriteStream(OUTPUT_FOLDER + '/array.jsonl');
+arrayFileStream.on('error', handleFSError);
+arrayFileStream.on('finish', handleFSComplete);
+
 io.on("connection", (socket) => {
   console.log('Websocket connection connected');
   
   socket.on('jsObj', (jsObj) => {
     console.log(JSON.stringify(jsObj));
+    
+    // Start new file stream using current timestamp of request as filename.
+    let fileStream = fs.createWriteStream(OUTPUT_FOLDER + '/meta.json');
+    
+    // Handle filesystem events
+    fileStream.on('error', handleFSError);
+    fileStream.on('finish', handleFSComplete);
+
+    fileStream.write(JSON.stringify(jsObj));
+    fileStream.end();
   });
 
-  socket.on('jsArrayItem', (jsArrayItem, callback) => {
-    callback(true);
+  socket.on('jsArrayItem', (jsArrayItem, final, callback) => {
+    arrayFileStream.write(JSON.stringify(jsArrayItem));
+    if (final) {
+      arrayFileStream.end();
+    }
   });
 });
 
