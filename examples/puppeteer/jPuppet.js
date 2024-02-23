@@ -114,7 +114,7 @@ arrayFileStream.on('finish', handleFSComplete);
 io.on("connection", (socket) => {
   console.log('Websocket connection connected');
   
-  socket.on('jsObj', (jsObj) => {
+  socket.on('jsObj', (jsObj, callback) => {
     console.log(JSON.stringify(jsObj));
     
     // Start new file stream using current timestamp of request as filename.
@@ -126,6 +126,7 @@ io.on("connection", (socket) => {
 
     fileStream.write(JSON.stringify(jsObj));
     fileStream.end();
+    callback();
   });
 
   socket.on('jsArrayItem', (jsArrayItem, final, callback) => {
@@ -136,6 +137,7 @@ io.on("connection", (socket) => {
       // Setup next stream writer.
       arrayFileStream = fs.createWriteStream(OUTPUT_FOLDER + '/array' + Date.now() + '.jsonl');
     }
+    callback();
   });
 });
 
